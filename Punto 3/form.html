@@ -1,0 +1,50 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Pedidos</title>
+    <link rel="stylesheet" media="screen" href="estilos/styles.css" >
+</head>
+<body>
+<form class="pedido_form" action="#" method="post" name="pedido_form" id="pedido_form" onsubmit="create(event)">
+    <ul>
+        <li>
+            <h2>Enviar Pedido</h2>
+            <span class="required_notification">* Campos Obligatorios</span>
+        </li>
+        <li>
+            <label for="nombre">Nombre:</label>
+            <input type="text"  placeholder="Pedido" maxlength="100" required />
+        </li>
+        <li>
+            <label for="monto">Monto:</label>
+            <input type="text" name="amount" placeholder="0" required pattern="(?<=\s|^)\d+(?=\s|$)"/>
+            <span class="form_hint">Formato: Números mayores a 0 sin punto ni coma</span>
+        </li>
+        <li>
+            <label for="descuento">Descuento:</label>
+            <input type="text" name="discount" placeholder="0" pattern="(?<=\s|^)\d+(?=\s|$)"/>
+            <span class="form_hint">Formato: Números mayores a 0 sin punto ni coma</span>
+        </li>
+
+            <button class="submit" type="submit">Enviar</button>
+        </li>
+    </ul>
+</form>
+</body>
+<script  type="text/javascript">
+
+function create(e){
+    e.preventDefault();
+    const form = new FormData(document.getElementById('pedido_form'));
+    //Para ser REST, debería bastar con que la url sea pedidos, ya que con el verbo POST se indica que guarda
+    fetch('http://localhost/pedidos/guardar', {
+        method: 'POST',
+        body: form
+     }).then(function(response){console.log(response)}).catch(function(e){console.log("Error al consumir la API")});
+
+}
+
+</script>
+</html>

@@ -1,0 +1,12 @@
+
+Tendría las siguientes cuestiones en cuenta:
+
+* Sólo buscaría los campos necesarios, es decir, no haría "select * "
+* Los campos a buscar/joinnear deberían estar indexados
+* Preferiblemente, las consultas deberían correr en un slave de sólo lectura
+* Si existe la posibilidad, pondría una capa de caché antes de ir a buscar a la base
+* Tendría la DB en un servidor separado al de aplicaciones
+* Los campos de tipo blob, son eficientes si contienen información de no mas de 64,
+caso contrario, conviene bajar los contenidos (PDFs, Imágenes, etc) a otro soporte de
+storage
+* No se deberían hacer consultas sobre los campos nullables 
